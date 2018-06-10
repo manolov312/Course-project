@@ -218,46 +218,46 @@ public class CalculateSquareEquation {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String sign1 = textField_sign_1.getText();
-					String sign2 = textField_sign_2.getText();
-					String sign3 = textField_sign_3.getText();
+					String sign_A = textField_sign_1.getText();
+					String sign_B = textField_sign_2.getText();
+					String sign_C = textField_sign_3.getText();
 					double a = Double.parseDouble(textCoefficient_A.getText());
 					double b = Double.parseDouble(textCoefficient_B.getText());
 					double c = Double.parseDouble(textCoefficient_C.getText());
-					double disc;
+					double discrim;
 					while (true) {
-						if (check(sign1, sign2, sign3)) {
+						if (check(sign_A, sign_B, sign_C)) {
 							result.setText("Некоректно въведени параметри!");
 							label_discriminant.setText("n/a");
 							label_result1.setText("n/a");
 							label_result2.setText("n/a");
 							break;
 						}
-						a = coefficientSign(a, sign1);
-						b = coefficientSign(b, sign2);
-						c = coefficientSign(c, sign3);
-						disc = discriminant(a, b, c);
-						if (disc < 0 || (a == 0 && b == 0 && c != 0)) {
+						a = coefficientSign(a, sign_A);
+						b = coefficientSign(b, sign_B);
+						c = coefficientSign(c, sign_C);
+						discrim = discriminant(a, b, c);
+						if (discrim < 0 || (a == 0 && b == 0 && c != 0)) {
 							result.setText("Уравнението няма реални корени.");
-							label_discriminant.setText("" + disc);
+							label_discriminant.setText("" + discrim);
 							label_result1.setText("n/a");
 							label_result2.setText("n/a");
 							break;
 						}
 						if (a == 0 && b == 0 && c == 0) {
 							result.setText("Всички реални числа са корени.");
-							label_discriminant.setText("" + disc);
+							label_discriminant.setText("" + discrim);
 							label_result1.setText("(-∞,+∞)");
 							label_result2.setText("(-∞,+∞)");
 							break;
 						}
 						result.setText("Резултат :");
-						label_discriminant.setText(String.format("%.2f", disc));
-						disc = Math.sqrt(disc);
-						double result1 = calculate(a, b, c, disc);
-						double result2 = calculate(a, b, c, -disc);
-						label_result1.setText(String.format("%.2f", result1));
-						label_result2.setText(String.format("%.2f", result2));
+						label_discriminant.setText(String.format("%.2f", discrim));
+						discrim = Math.sqrt(discrim);
+						double result_X1 = calculate(a, b, c, discrim);
+						double result_X2 = calculate(a, b, c, -discrim);
+						label_result1.setText(String.format("%.2f", result_X1));
+						label_result2.setText(String.format("%.2f", result_X2));
 						break;
 					}
 				} catch (NumberFormatException e) {
@@ -292,10 +292,10 @@ public class CalculateSquareEquation {
 	}
 
 	// Проверява дали знаците пред коефициентите са зададени правилно
-	private static boolean check(String sign1, String sign2, String sign3) {
+	private static boolean check(String signA, String signB, String signC) {
 		boolean check = true;
-		if((sign1.equals("+") || sign1.equals("-")) && (sign2.equals("+")
-				|| sign2.equals("-")) && (sign3.equals("+") || sign3.equals("-"))) {
+		if((signA.equals("+") || signA.equals("-")) && (signB.equals("+")
+				|| signB.equals("-")) && (signC.equals("+") || signC.equals("-"))) {
 			check = false;
 		}
 		return check;
@@ -308,11 +308,11 @@ public class CalculateSquareEquation {
 	}
 	
 	// Изчислява корените
-	private static double calculate(double a, double b, double c, double disc) {
+	private static double calculate(double a, double b, double c, double discrim) {
 		if (a == 0) {
 			return -c / b;
 		} else {
-			return (-b + disc) / (2 * a);
+			return (-b + discrim) / (2 * a);
 		}
 	}
 }
