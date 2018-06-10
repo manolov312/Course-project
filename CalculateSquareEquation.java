@@ -17,11 +17,11 @@ public class CalculateSquareEquation {
 
 	private JFrame frame;
 	private JTextField textCoefficient_A;
-	private JTextField textField_sign_2;
+	private JTextField textField_sign_B;
 	private JTextField textCoefficient_B;
-	private JTextField textField_sign_3;
+	private JTextField textField_sign_C;
 	private JTextField textCoefficient_C;
-	private JTextField textField_sign_1;
+	private JTextField textField_sign_A;
 	private JLabel label_4;
 	private JLabel label_5;
 	private JLabel label_6;
@@ -76,19 +76,19 @@ public class CalculateSquareEquation {
 			}
 		});
 		
-		textField_sign_1 = new JTextField();
-		textField_sign_1.addMouseListener(new MouseAdapter() {
+		textField_sign_A = new JTextField();
+		textField_sign_A.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_sign_1.setText(changeSign(textField_sign_1.getText()));
+				textField_sign_A.setText(changeSign(textField_sign_A.getText()));
 			}
 		});
-		textField_sign_1.setText("+/-");
-		textField_sign_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_sign_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_sign_1.setColumns(10);
-		textField_sign_1.setBounds(10, 44, 34, 29);
-		frame.getContentPane().add(textField_sign_1);
+		textField_sign_A.setText("+/-");
+		textField_sign_A.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_sign_A.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField_sign_A.setColumns(10);
+		textField_sign_A.setBounds(10, 44, 34, 29);
+		frame.getContentPane().add(textField_sign_A);
 		
 		textCoefficient_A.setHorizontalAlignment(SwingConstants.CENTER);
 		textCoefficient_A.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -108,19 +108,19 @@ public class CalculateSquareEquation {
 		label_1.setBounds(125, 44, 14, 14);
 		frame.getContentPane().add(label_1);
 		
-		textField_sign_2 = new JTextField();
-		textField_sign_2.addMouseListener(new MouseAdapter() {
+		textField_sign_B = new JTextField();
+		textField_sign_B.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_sign_2.setText(changeSign(textField_sign_2.getText()));
+				textField_sign_B.setText(changeSign(textField_sign_B.getText()));
 			}
 		});
-		textField_sign_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_sign_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_sign_2.setText("+/-");
-		textField_sign_2.setBounds(138, 44, 34, 29);
-		frame.getContentPane().add(textField_sign_2);
-		textField_sign_2.setColumns(10);
+		textField_sign_B.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_sign_B.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField_sign_B.setText("+/-");
+		textField_sign_B.setBounds(138, 44, 34, 29);
+		frame.getContentPane().add(textField_sign_B);
+		textField_sign_B.setColumns(10);
 		
 		textCoefficient_B = new JTextField();
 		textCoefficient_B.addMouseListener(new MouseAdapter() {
@@ -142,19 +142,19 @@ public class CalculateSquareEquation {
 		label_2.setBounds(241, 44, 19, 29);
 		frame.getContentPane().add(label_2);
 		
-		textField_sign_3 = new JTextField();
-		textField_sign_3.addMouseListener(new MouseAdapter() {
+		textField_sign_C = new JTextField();
+		textField_sign_C.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_sign_3.setText(changeSign(textField_sign_3.getText()));
+				textField_sign_C.setText(changeSign(textField_sign_C.getText()));
 			}
 		});
-		textField_sign_3.setText("+/-");
-		textField_sign_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_sign_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_sign_3.setColumns(10);
-		textField_sign_3.setBounds(270, 45, 34, 29);
-		frame.getContentPane().add(textField_sign_3);
+		textField_sign_C.setText("+/-");
+		textField_sign_C.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_sign_C.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField_sign_C.setColumns(10);
+		textField_sign_C.setBounds(270, 45, 34, 29);
+		frame.getContentPane().add(textField_sign_C);
 		
 		textCoefficient_C = new JTextField();
 		textCoefficient_C.addMouseListener(new MouseAdapter() {
@@ -218,9 +218,9 @@ public class CalculateSquareEquation {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String sign_A = textField_sign_1.getText();
-					String sign_B = textField_sign_2.getText();
-					String sign_C = textField_sign_3.getText();
+					String sign_A = textField_sign_A.getText();
+					String sign_B = textField_sign_B.getText();
+					String sign_C = textField_sign_C.getText();
 					double a = Double.parseDouble(textCoefficient_A.getText());
 					double b = Double.parseDouble(textCoefficient_B.getText());
 					double c = Double.parseDouble(textCoefficient_C.getText());
