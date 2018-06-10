@@ -194,7 +194,7 @@ public class CalculateSquareEquation {
 		
 		label_6 = new JLabel("X2 =");
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		label_6.setBounds(234, 206, 74, 44);
+		label_6.setBounds(226, 206, 72, 44);
 		frame.getContentPane().add(label_6);
 		
 		label_discriminant = new JLabel("");
@@ -204,12 +204,12 @@ public class CalculateSquareEquation {
 		
 		label_result1 = new JLabel("");
 		label_result1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		label_result1.setBounds(102, 207, 121, 44);
+		label_result1.setBounds(83, 207, 140, 44);
 		frame.getContentPane().add(label_result1);
 		
 		label_result2 = new JLabel("");
 		label_result2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		label_result2.setBounds(316, 206, 103, 44);
+		label_result2.setBounds(298, 206, 121, 44);
 		frame.getContentPane().add(label_result2);
 		
 		
@@ -224,42 +224,74 @@ public class CalculateSquareEquation {
 					double a = Double.parseDouble(textCoefficient_A.getText());
 					double b = Double.parseDouble(textCoefficient_B.getText());
 					double c = Double.parseDouble(textCoefficient_C.getText());
-					double disc =discriminant(a,b,c,sign1,sign3);
-					if(check(sign1,sign2,sign3)) {
-						result.setText("Некоректно въведени параметри!");
-					} else if(disc < 0 || (a == 0 && b == 0)){
-						result.setText("Уравнението няма реални корени.");
-						label_discriminant.setText("" + disc);
-						label_result1.setText("n/a");
-						label_result2.setText("n/a");
-					} else {
+					double disc;
+					while (true) {
+						if (check(sign1, sign2, sign3)) {
+							result.setText("Некоректно въведени параметри!");
+							label_discriminant.setText("n/a");
+							label_result1.setText("n/a");
+							label_result2.setText("n/a");
+							break;
+						}
+						a = coefficientSign(a, sign1);
+						b = coefficientSign(b, sign2);
+						c = coefficientSign(c, sign3);
+						disc = discriminant(a, b, c);
+						if (disc < 0 || (a == 0 && b == 0 && c != 0)) {
+							result.setText("Уравнението няма реални корени.");
+							label_discriminant.setText("" + disc);
+							label_result1.setText("n/a");
+							label_result2.setText("n/a");
+							break;
+						}
+						if (a == 0 && b == 0 && c == 0) {
+							result.setText("Всички реални числа са корени.");
+							label_discriminant.setText("" + disc);
+							label_result1.setText("(-∞,+∞)");
+							label_result2.setText("(-∞,+∞)");
+							break;
+						}
 						result.setText("Резултат :");
 						label_discriminant.setText(String.format("%.2f", disc));
 						disc = Math.sqrt(disc);
-						double result1 =  calculate(a,b,c,disc,sign1,sign2,sign3);
-						double result2 =  calculate(a,b,c,- disc,sign1,sign2,sign3);
+						double result1 = calculate(a, b, c, disc);
+						double result2 = calculate(a, b, c, -disc);
 						label_result1.setText(String.format("%.2f", result1));
 						label_result2.setText(String.format("%.2f", result2));
+						break;
 					}
-				} catch (Exception e) {
+				} catch (NumberFormatException e) {
 					result.setText("Некоректно въведени параметри!");
+					label_discriminant.setText("n/a");
+					label_result1.setText("n/a");
+					label_result2.setText("n/a");
 				}
 			}
 		});
-		
+
 		button.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		button.setBounds(10, 97, 409, 35);
 		frame.getContentPane().add(button);
 	}
 	
-	private static String changeSign (String sign) {
-		if(sign.equals("+")) {
+	// Променя знака пред коефициента
+	private static String changeSign(String sign) {
+		if (sign.equals("+")) {
 			return "-";
 		} else {
 			return "+";
 		}
 	}
-	
+
+	// Уточнява знака пред коефициента
+	private static double coefficientSign(double num, String sign) {
+		if (sign.equals("-")) {
+			num = -num;
+		}
+		return num;
+	}
+
+	// Проверява дали знаците пред коефициентите са зададени правилно
 	private static boolean check(String sign1, String sign2, String sign3) {
 		boolean check = true;
 		if((sign1.equals("+") || sign1.equals("-")) && (sign2.equals("+")
@@ -269,33 +301,18 @@ public class CalculateSquareEquation {
 		return check;
 	}
 	
-	private static double discriminant(double a, double b, double c, String sign1, String sign3) {
-		if(sign1.equals("-")) {
-			a = - a;
-		}
-		if(sign3.equals("-")) {
-			c = - c;
-		}
-		double disc = b * b - 4 * a * c ;
-		return disc;
+	// Изчислява дискриминантата
+	private static double discriminant(double a, double b, double c) {
+		return  b * b - 4 * a * c ;
+		
 	}
 	
-	private static double calculate(double a, double b,double c, double disc, String sign1, String sign2,String sign3) {
-		double result = 0;
-		if(sign1.equals("-")) {
-			a = - a;
-		}
-		if(sign2.equals("-")) {
-			b = - b;
-		}
-		if(sign3.equals("-")) {
-			c = - c;
-		}
-		if(a == 0) {
-			result = - c / b;
+	// Изчислява корените
+	private static double calculate(double a, double b, double c, double disc) {
+		if (a == 0) {
+			return -c / b;
 		} else {
-		result = (-b + disc) / (2 * a) ;
+			return (-b + disc) / (2 * a);
 		}
-		return result;
 	}
 }
